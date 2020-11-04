@@ -1,0 +1,106 @@
+1.Complexity of different operations in Binary tree, Binary Search Tree and AVL tree
+https://www.geeksforgeeks.org/complexity-different-operations-binary-tree-binary-search-tree-avl-tree/?ref=rp
+2. Binary Tree Bootcamp: Full, Complete, & Perfect Trees. Preorder, Inorder, & Postorder Traversal.
+https://www.youtube.com/watch?v=BHB0B1jFKQc
+
+
+
+Binary Tree ( sorted and unsorted)
+    A tree whose elements have at most 2 children is called a binary tree  , below are 3 Binary Tree
+Full Binary Tree:
+    Every node (besides children) has exactly 2 children (the maximum children a node can have in a binary tree).
+Complete Binary Tree:
+    Every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
+Perfect Binary Tree:
+    All interior nodes have two children and all leaves have the same depth or same level. Perfect binary trees are both full and complete.
+
+Full Binary Tree  ( 0 or 2 children)
+
+                 50
+               /   \
+             40     70
+                   /  \
+                  60   80
+
+Complete Binary Tree  ( top to bottom , left to right )
+
+             50
+          /     \
+         40      70
+                /  \
+               60   80
+
+Perfect Binary Tree  ( both full and complete tree )
+              50
+           /     \
+          30      70
+         /  \    /  \
+       20   40  60   80
+
+
+Binary Search Tree - BST ( aka:  Sorted binary tree in a non-decreasing order)  - Balanced vs UnBalanced
+
+    1.  Balanced Binary Search Tree - BBST   ( balanced means: height-balanced.)
+
+        Specification: Binary tree in which the height of the two subtrees of every node never differ by more than 1.
+        An empty binary tree is always height-balanced.
+        A non-empty binary tree is height-balanced if:
+        > Its left subtree is height-balanced.
+        > Its right subtree is height-balanced.
+        > The difference between heights of left & right subtree is NOT greater than 1.   (<=1 )
+
+            A
+             \
+             / \
+              B
+            C   D
+        As seen the left subtree of A is height-balanced (as it is empty) and so is its right subtree.
+        But still the tree is not height-balanced as condition 3 is NOT met as height of left-subtree is 0 and height of right sub-tree is 2.
+
+        Also the following tree is not height balanced even though the height of left and right sub-tree are equal.
+        take C for example:  C left-subtree is 0 height and right-subtree is 2
+               A
+             /  \
+            B    C
+           /      \
+          D        G
+         /          \
+        E            H
+
+        Below is a height-balanced Binary Search Tree
+
+                   25             // Level 1
+                20    36          // Level 2
+              10 22  30 40        // Level 3
+          .. .. .. .. .. .. ..
+        .. .. .. .. .. .. .. ..   // Level n
+
+    2. Unbalanced Binary Search Tree  -- BST  ( and NOT balanced)
+
+               10           // Level 1
+              9  11         // Level 2
+             7 . . 20       // Level 3
+            8 . . . 15 24
+           6 . . . . . . .  // Level n
+
+
+
+Preorder Traversal:
+    NLR - Pre-order traversal is used to create a copy of the tree.
+Inorder Traversal:
+    LNR - In-order traversal is very commonly used on binary search trees because it returns values from the underlying set in order,
+Postorder Traversal:
+    LRN - Postorder traversal is used to delete the tree.
+
+If you know you need to explore the roots before inspecting any leaves, you pick pre-order because you will encounter all the roots before all of the leaves.
+
+If you know you need to explore all the leaves before any nodes, you select post-order because you don't waste any time inspecting roots in search for leaves.
+
+If you know that the tree has an inherent sequence in the nodes, and you want to flatten the tree back into its original sequence,
+than an in-order traversal should be used. The tree would be flattened in the same way it was created.
+A pre-order or post-order traversal might not unwind the tree back into the sequence which was used to create it.
+
+
+
+
+level-order traversal can be used to check if the tree is balanced or not.

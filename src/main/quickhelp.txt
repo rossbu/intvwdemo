@@ -1,0 +1,222 @@
+
+### Math
+    x * 2  means  x << 1
+    x / 2  meams  x >> 1
+
+###
+    Arrays,
+    Objects,
+    Collectors,
+    Comparators,
+    Collector.reverseOrder();
+    Collections
+
+###
+    use some
+    .orElseGet(1);
+            .ifPresentOrElse(System.out::println, () -> System.out.println("n/a"));
+
+
+
+### Array List collection
+
+trick 1:
+    Vector vs ArrayList :  Vector class that Stack extends is basically the "thread-safe" version of an ArrayList.
+    StringBuffer vs StringBuilder:   Buffer is safer , so it's internally synchronized , so it's slower
+
+trick 2:
+    use division and Remainder to calculate bills and boxes
+    use /  to extract off right-most int number and  use % to remove the right more number. 1234 -> 123 and 4
+
+trick 3: String to Array
+    String[] arr = "iam".split("");                 // String to String[]
+    char[] arr = s.toCharArray();                   // String to char[]  -- 'i', 'a' ,'m'
+    s.chars().forEach( e-> set.add((char)e));       // String to Set<Character>
+    String s = Character.toString(c)                // 1 Character to 1 String
+
+    s.chars().forEach( e-> set1.add((char)e));                  // char[] to Set<Character>
+    char[] arr = s.toCharArray();
+    for (char c : arr){ set.add(c);}                            // char[] to Set<Character>
+
+
+    String str = String.join("", set);               //  HashSet<String> to String
+    set.stream().collect(Collectors.joining());      //  HashSet<String> to String
+
+trick 4 : Collections to Array
+
+    Integer[] array = hashSet.toArray(new Integer[hSetNumbers.size()]);   // Set to Integer[]   then you can use idx
+    Integer[] array = list.toArray(new Integer[list.size()]);             // list to Integer[]
+    String[] array = list.toArray(new String[list.size()]);               // list to String[]
+    LinkedHashSet  set  = new LinkedHashSet(list)                // list to set
+    List<Integer> list = new ArrayList<Integer>( set );          // Set to List,        then you can use idx
+
+trick 5:
+    rotate string or reverse string can be done by 'subString(from,to)' function.
+
+trick 6:
+    int len = 0;
+    while( len--> 0) {
+        System.out.print(len+" ");  // -- is execusted not matter true or false, so it's -1
+    }
+
+trick 7:
+    Integer::sum       ===  (x,y) -> x+y      [ the sum function take 2 arguments, sum( int x, int y) ]
+    Integer::intValue  ===  i -> i
+    the trick is about the method signature :
+        int  sum(int x, int y)
+        int  intValue();     // knows the first i is implicitly used by lambda
+
+
+
+#### Below are some common type conversions
+
+int[] to Integer[]
+    IntStream.of(arrs).mapToObj(e->e).toArray(Integer[]::new)
+
+int[] to List<integer> ( or Set or HashSet)
+    int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    Integer[] boxedArray = IntStream.of(array).boxed().toArray(Integer[]::new);
+
+int[] to HashSet ( which can remove duplicates,  Collectors.toCollection is more flexible to let develoepr specifiy what DS he wants to use.)
+    HashSet<Integer> hashset = IntStream.of(array).boxed().collect(Collectors.toCollection(HashSet::new));
+    read with me;  collect collectors to collection
+
+List to int[]
+    int[] output = list.stream().mapToInt(Integer::intValue).toArray();
+    int[] output = list.stream().mapToInt(i->i).toArray();
+
+
+IntStream, Arrays.stream ,Stream.of
+    Arrays.stream(array)  // good
+    IntStream.of(array)   // good
+    Stream.of(arrays)     // bad  for int[] or char[] will only treat as one array element, so do NOT use Stream.of in most cases.
+    // Stream.of()  ONLY FOR NON-primitive types.
+
+int[] initialization
+    int array[]={}; // bad this renders the array completely useless, because you're saying the size of the array is 0
+    int array[] = { 5, 5, 5, 5 }; // good
+    int[] array = new int[4];     // good
+    be alert:  you can't reassign array[] to another array, you can only initalize the int[] once.
+
+String copy
+    Arrays.copyOf(letters, len) // len is the length
+    S.substring(0,end);         //  end is the pointer ,  subString is to use new String() for 'substring', so create a new String object, == will be false.
+
+
+String  to IntStream
+    IntStream is = "abcd".chars();
+
+char[] to IntStream
+    char[] chars = s.toCharArray();
+    java.io.CharBuffer.wrap(chars).chars();
+
+char[] to String
+     String.valueOf(chars);   // return zyx  -- good
+     Arrays.toString(chars);  // [u, z, y, x]  --  formatted with array [,] , which is automatically formatted  as array by Arrays.java
+
+
+==================================================================================================================================
+
+
+
+
+
+SubString vs SubSequence vs SubSet vs Permutation
+
+    Substring :
+        A substring is a contiguous sequence of characters within a string, where order matters. substring is also a subsequence.
+        e.g: abbc
+        a
+        ab
+        abb
+        abbc
+        b
+        bb
+        bbc
+        b
+        bc
+        c
+
+    Subsequences:
+        From a string, any of the character but in sequence. for example: Substring
+         u s i
+         s b t i n g
+         r g
+         S
+         i
+         g
+
+        banana  // Example: The string "anna" is a subsequence of the string "banana":
+         || ||
+         an na
+
+        banana
+         |||||
+         ana||
+           |||
+           ana
+
+    Subset :
+        any possible combinations of original set, For example, {1, 2, 3}, subset can be
+        {}
+        {1}
+        {2}
+        {3}
+        {1, 2}
+        {1, 3}
+        {2, 3}
+        {1,2,3}   // whole set
+
+        Math:
+            Set        : 2^n
+            Proper Set : 2^n -1 , where n is the number of elements.
+            number of all possible subsets of A is 8 which is equal 2^3 = 8
+            proper subsets are 2^3 - 1 = 7
+
+        Note : set {3,2} and {2,3} is the same set ( Set has no orders).
+               For A = {red, blue} and B = {red, white, blue},  A ⊆ B since every element of A is also an element of B.
+               A set is a subset of itself since a set contains all its elements.
+               the empty set is a subset of every set,
+        link:
+            http://web.mnstate.edu/peil/MDEV102/U1/S2/Subsets6.htm#:~:text=A%20set%20is%20a%20subset,empty%20set%20has%20no%20elements.
+            https://www.youtube.com/watch?time_continue=324&v=usRkVdibnAM&feature=emb_title
+
+    Permutation : rearrange of all elements in an array
+        String s = "XYZ";
+        XYZ
+        XZY
+        YXZ
+        YZX
+        ZXY
+        ZYX
+        https://www.mathsisfun.com/combinatorics/combinations-permutations.html
+
+++ --  -->  for| while loop
+         // no need to do N >0 , and N--,  just in one statement.  while(idx-->0)
+         //
+
+        while (idx<len){
+            System.out.println(idx);
+            head = insert(head,array[idx]);
+            idx++;
+        }
+
+        while (idx++<len){  // idx increased by 1 right after entering loop.
+            System.out.println(idx);
+            head = insert(head,array[idx]);
+        }
+
+Static method can't access instance variable ( including non-static inner class) :  think when there is no instance at all. static method can be called. what would happen
+Instance method can access static variable : think static varaible as shared resource among all objects.
+
+
+
+Resources:
+    20 String Algorithm Questions from Coding Interviews
+    https://javarevisited.blogspot.com/2015/01/top-20-string-coding-interview-question-programming-interview.html#axzz6XlsG1HM9
+
+    15 Data Structures and Algorithm
+    https://javarevisited.blogspot.com/2013/03/top-15-data-structures-algorithm-interview-questions-answers-java-programming.html
+
+    30 Array Interview Questions and Answers for Programmers
+    https://javarevisited.blogspot.com/2015/06/top-20-array-interview-questions-and-answers.html#ixzz6Y1vpXjF8
