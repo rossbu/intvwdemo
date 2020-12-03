@@ -48,7 +48,7 @@ trick 4 : Collections to Array
     Integer[] array = list.toArray(new Integer[list.size()]);             // list to Integer[]
     String[] array = list.toArray(new String[list.size()]);               // list to String[]
     LinkedHashSet  set  = new LinkedHashSet(list)                // list to set
-    List<Integer> list = new ArrayList<Integer>( set );          // Set to List,        then you can use idx
+    List<Integer> list = new ArrayList<>( set );          // Set to List,        then you can use idx
 
 trick 5:
     rotate string or reverse string can be done by 'subString(from,to)' function.
@@ -70,16 +70,17 @@ trick 7:
 
 #### Below are some common type conversions
 
-int[] to Integer[]
-    IntStream.of(arrs).mapToObj(e->e).toArray(Integer[]::new)
+int[] to List   -> use collect ( ( List, Set or HashSet)
+    List<Integer> list = IntStream.of(nums).boxed().collect(Collectors.toList());
 
-int[] to List<integer> ( or Set or HashSet)
-    int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-    Integer[] boxedArray = IntStream.of(array).boxed().toArray(Integer[]::new);
-
-int[] to HashSet ( which can remove duplicates,  Collectors.toCollection is more flexible to let develoepr specifiy what DS he wants to use.)
+int[] to HashSet ( which can remove duplicates.)
     HashSet<Integer> hashset = IntStream.of(array).boxed().collect(Collectors.toCollection(HashSet::new));
-    read with me;  collect collectors to collection
+
+int[] to Integer[]  -> use toArray
+    int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    IntStream.of(arrs).mapToObj(e->e).toArray(Integer[]::new)
+    IntStream.of(arrs).boxed().toArray(Integer[]::new);
+
 
 List to int[]
     int[] output = list.stream().mapToInt(Integer::intValue).toArray();
@@ -102,11 +103,8 @@ String copy
     Arrays.copyOf(letters, len) // len is the length
     S.substring(0,end);         //  end is the pointer ,  subString is to use new String() for 'substring', so create a new String object, == will be false.
 
-
-String  to IntStream
-    IntStream is = "abcd".chars();
-
 char[] to IntStream
+    IntStream is = "abcd".chars();
     char[] chars = s.toCharArray();
     java.io.CharBuffer.wrap(chars).chars();
 

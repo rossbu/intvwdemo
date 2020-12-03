@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.datastructure.string;
+package com.shareforever.intvwdemo.problem;
 
 
 import com.google.common.collect.Lists;
@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.*;
@@ -31,27 +32,68 @@ public class MostFrequentWords {
 //        solution3(str,3);
 //        solution4(str,kmost );
 //        solution5(str); // only find the most frequent elements from array
-        solution6(str, kmost);
-        Multimap m;
+//        solution6(str, kmost);
+        tryme(str, 2);
+        wordFreqV2();
+    }
+
+    /*
+     return the kth most frequent word in th str which is separated by ' '
+     */
+
+    public static String tryme(String str, int kthIndex) {
+        String kthElement = "";
+        String ans= "N/A";  //  for some reason, not found.
+
+        // exception
+        if (str == null || str.length() == 0) return str;
+
+        if ( kthIndex == 0 ) return "_";
+
+        // put str into string[]
+        String[] words = str.split(" ");
+
+        // put [ word, frequency ] in Map
+        Map<String, Integer> map = new HashMap<>();
+        for (String w : words) {
+            map.put(w, map.getOrDefault(w, 0) + 1);
+        }
+
+        // sort entries in list<Entry>
+        LinkedList<Map.Entry<String,Integer>> list = new LinkedList(map.entrySet());
+        Collections.sort(list, (e1,e2) -> e2.getValue() - e1.getValue());
+
+       // skip kth-1
+        ans  = list.stream().skip(kthIndex-1)
+                .findFirst().get().getKey();
+
+        System.out.println(ans);
+
+        return ans;
+
+
 
     }
+
     public static void wordFreqV3() {
         String text = "Ann while Bob had had had had had had had had had had had a better effect on on the teacher";
         ConcurrentMap<String, Integer> freqMap =
                 asList(text.split("[\\s.]"))
                         .parallelStream()
-                        .filter(s -> !s.isEmpty())
                         .collect(Collectors.toConcurrentMap(w -> w.toLowerCase(), w -> 1, Integer::sum));
         System.out.println(freqMap.toString());
     }
+
     public static void wordFreqV2() {
-        String text = "Ann while Bob had had had had had had had had had had had a better effect on on the teacher";
+        String text = "Ann while while bob Bob had had had had had had had had had had had a better effect on on the teacher";
         Map<String, Integer> freqMap = new HashMap<>();
-        Arrays.asList(text.split("[\\s.]")).forEach(s -> {
-            freqMap.compute(s, (s1, count) -> count == null ? 1 : count + 1);
+        List<String> list = asList(text.split("[\\s.]"));
+        list.forEach(s -> {
+            freqMap.compute(s, (k, v) -> v == null ? 1 : v + 1);
         });
         System.out.println(freqMap.toString());
     }
+
     public static void textWordFreqV1() {
         String text = "Ann while Bob had had had had had had had had had had had a better effect on on the teacher";
         ConcurrentMap<String, Integer> freqMap =
@@ -62,14 +104,15 @@ public class MostFrequentWords {
 
         //Priority queue that uses frequency as the comparator and size as 3
         PriorityQueue<String> pq = new PriorityQueue<>(Comparator.comparingInt(freqMap::get));
-        for(String key: freqMap.keySet()) {
+        for (String key : freqMap.keySet()) {
             pq.add(key);
-            if(pq.size() > 3) {
+            if (pq.size() > 3) {
                 pq.poll();
             }
         }
         System.out.println("Top 3 words by occurrences  : " + pq);
     }
+
     private static void solution6(String str, int kmost) {
         List<String> list = asList(str.split(" "));
         Objects.<Map.Entry<String, Integer>>compare(null, null, (e1, e2) -> e1.getValue().compareTo(e2.getValue()));
@@ -110,7 +153,7 @@ public class MostFrequentWords {
     private static void solution3(String str, int kmost) {
         List<String> list = asList(str.split(" "));
 
-        // do frequency return a map with word - frequency
+        // Map [ word - frequency ]
         Map<String, Integer> unsortedMap = doFrequency(list);
 
         // sort the map by value

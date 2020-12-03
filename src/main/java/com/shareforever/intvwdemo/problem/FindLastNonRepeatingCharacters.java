@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.datastructure.string;
+package com.shareforever.intvwdemo.problem;
 
 
 /**

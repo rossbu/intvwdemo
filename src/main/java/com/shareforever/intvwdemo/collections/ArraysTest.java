@@ -1,5 +1,6 @@
 package com.shareforever.intvwdemo.collections;
 
+import java.text.DateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -9,17 +10,36 @@ public class ArraysTest {
 
 
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 2, 3, 4, 5, 6, 7, 22, 31, 12, 2123, 2323, 4, 567, 7, 8, 8, 7, 6};
-        String[][] doubleArray = new String[][]{
-                {"tbu", "dad"},
-                {"kun", "mom"},
-                {"miya", "kid"}};
 
-        fill();
-        sort(arr);
-        binarySearch(arr); // the array must be sorted before binarySearch
-        asList(arr);
-        doubleArray(doubleArray);
+
+        int i;
+        float f = 2.3f;
+        double d = 2.7;
+        i = ((int)Math.ceil(f)) * ((int)Math.round(d));
+        System.out.println(i);
+
+//        Date d = new Date(2011343412345L);
+//        int i = 0, j =2;
+//        do {
+//            i = ++i;
+//            j--;
+//        } while (j >0);
+//        System.out.println(i);
+
+
+
+//
+//        int[] arr = new int[]{1, 2, 3, 4, 5, 6, 7, 22, 31, 12, 2123, 2323, 4, 567, 7, 8, 8, 7, 6};
+//        String[][] doubleArray = new String[][]{
+//                {"tbu", "dad"},
+//                {"kun", "mom"},
+//                {"miya", "kid"}};
+//
+//        fill();
+//        sort(arr);
+//        binarySearch(arr); // the array must be sorted before binarySearch
+//        asList(arr);
+//        doubleArray(doubleArray);
     }
 
     static void fill() {
@@ -62,6 +82,8 @@ public class ArraysTest {
     private static void asList(int[] arr) {
         Integer[] integerArray = Arrays.stream(arr).boxed().toArray(Integer[]::new);
         Arrays.asList(integerArray).forEach(System.out::println);
+        HashSet<Integer> set = new HashSet<Integer>();
+        Integer[] integers = set.stream().toArray(Integer[]::new);
     }
 
     private static void binarySearch(int[] arr) {

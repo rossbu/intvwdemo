@@ -21,6 +21,27 @@ public class ReverseWords {
         for (char c : chars) {
             System.out.println("'" + c + "'");
         }
+
+
+        tryme(arr);
+    }
+
+    private static void tryme(char[] arr) {
+
+        // handle edge & corner cases
+
+        int len = arr.length;
+
+        // reverse all
+        int start = 0;
+        int end = len;
+        while ( start < len){
+            char temp = arr[start];
+
+        }
+
+
+        // reverse each separated by ' '
     }
 
 

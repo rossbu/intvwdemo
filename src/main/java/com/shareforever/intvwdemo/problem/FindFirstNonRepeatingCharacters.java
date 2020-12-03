@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.datastructure.string;
+package com.shareforever.intvwdemo.problem;
 
 
 import java.util.LinkedHashMap;
@@ -17,22 +17,33 @@ public class FindFirstNonRepeatingCharacters {
     public static void main(String[] args) {
         String str = "azbcdeedcba";
 //        System.out.println(bruteforce(str));
-        System.out.println(betterForce(str));
-        System.out.println(bestForce(str));
+//        System.out.println(betterForce(str));
+//        System.out.println(bestForce(str));
         System.out.println(tryme(str));
     }
 
-    private static char tryme(String str) {
-        char[] chars = str.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if (str.indexOf(chars[i]) == str.lastIndexOf(chars[i])) {
-                return chars[i];
-            }
+    private static char tryme(String s) {
+       // put chars in map
+        LinkedHashMap<Character,Integer> map = new LinkedHashMap<>();
+        for ( int i = 0 ; i < s.length(); i++){
+            char c  = s.charAt(i);
+            map.put(c, map.getOrDefault(c,0) +1);
         }
-        return '_';
+
+        // findFirst with value 1
+        return map.entrySet().stream()
+                .filter( e -> e.getValue() ==1)
+                .findFirst()
+                .get().getKey();
     }
 
+    /*
+        for ( o -N ){
+            char c = chars[i]
 
+        }
+
+     */
     private static char bruteForce(String input) {
         char c = ' ';
         char[] chars = input.toCharArray();
@@ -84,7 +95,7 @@ public class FindFirstNonRepeatingCharacters {
     public static char betterForce(String s) {
         char[] r = new char[1];
 
-        // put in Linkedhashmap which maintains the insert order
+        // put everything in linkedHashMap [char, frequency]
         Map<Character, Integer> m = new LinkedHashMap<Character, Integer>();
         for (int i = 0; i < s.length(); i++) {
             if (m.containsKey(s.charAt(i))) {
@@ -94,7 +105,7 @@ public class FindFirstNonRepeatingCharacters {
             }
         }
 
-        // find the first pair ( key -value), and value is 1
+        // find the first pair ( key - value) with value 1
         m.entrySet().stream()
                 .filter(e -> e.getValue() == 1)
                 .findFirst()
