@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ArrayListTest {
 
     public static void main(String[] args) {
-        // if you just simply add element and sout the list from 0 - end, it would like like 'FIFO'
+        // if you just simply add element and print the list from 0 - end, it would like like 'FIFO'
         ArrayList<Integer> list = new ArrayList<Integer>();
         list.add(5); // index == 0
         list.add(4); // index == 1
@@ -31,9 +31,9 @@ public class ArrayListTest {
 //        list.remove(4);System.out.println(list);
 //        list.remove(0);System.out.println(list);
 //        list.remove(1);System.out.println(list);
-//
+
 //        // use lambda remove again
-//        list.removeIf(e->e==2);
-//        System.out.println(list);
+        list.removeIf(e->e==2);
+        System.out.println(list);
     }
 }

@@ -2,24 +2,32 @@ package com.shareforever.intvwdemo.sorting;
 
 import java.util.Arrays;
 
+/**
+ * best time Complexity : best case time complexity will be O(n),
+ */
+
+abstract class Animal{
+    abstract void sayHello();
+}
 public class BubbleSort {
     public static void main(String[] args) {
-        int[] arr = {
-                220, 77, 377, 267, 495,
-                128, 297, 187, 178, 433,
-                138, 267, 282, 105, 38
-        };
-        solution(arr);
-
-        // print
-        Arrays.stream(arr).forEach(System.out::println);
-        System.out.println(Arrays.stream(arr).sum());
+//
+//        int[] arr = {
+//                220, 77, 377, 267, 495,
+//                128, 297, 187, 178, 433,
+//                138, 267, 282, 105, 38
+//        };
+//        solution(arr);
+//
+//        // print
+//        Arrays.stream(arr).forEach(System.out::println);
+//        System.out.println(Arrays.stream(arr).sum());
 
     }
 
 
     /**
-     * Copmlexity: o(n2)
+     * Comlexity: o(n2)
      * <p>
      * 5 5 3 2 1 9 0
      * x x x x x x

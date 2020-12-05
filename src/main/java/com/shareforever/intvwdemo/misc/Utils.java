@@ -2,6 +2,11 @@ package com.shareforever.intvwdemo.misc;
 
 public class Utils {
 
+
+    public static void main(String[] args) {
+
+    }
+
     public static void swap(int[] arr, int i, int j) {
         int temp;
         temp = arr[i];

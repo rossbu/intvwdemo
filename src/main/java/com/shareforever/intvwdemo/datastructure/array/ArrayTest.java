@@ -1,6 +1,7 @@
 package com.shareforever.intvwdemo.datastructure.array;
 
 import java.util.Arrays;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -14,46 +15,73 @@ public class ArrayTest {
         String[] strbs = {"1", "2", "3"};
         Double[] d1 = {1d, 2d};
         Double[] d2 = {4d, 5d};
-        int[] arra = {1, 3, 5, 7, 9, 10};
-        int[] arrb = {2, 4, 6};
+        int[] arra = {1, 2, 27, 3, 3, 5, 7, 9, 10};
+        int[] arrb = {12, 14, 16, 18};
 
+        System.out.println("----- Array -  Merge --------");
+//        merge2SortedArray(arra, arrb);
+//        merge2SortedArray2(arra, arrb);
+//        merge2SortedArray3(arra, arrb);
 
-//        merge2SortedArray(arra,6,arrb,3);
-        merge2SortedArray(arra, arrb);
+        System.out.println("----- Array -  Sum|Convert --------");
+//        sumPrimitiveArray(primitiveArray);
+//        sumIntegerArray(objectArray);
+//        convertIntArraytoIntegerArray(primitiveArray);
+//        convertIntegerArrayToIntArray(objectArray);
 
-        int[] ans = new int[arra.length + arrb.length];
-        int i = arra.length - 1, j = arrb.length - 1, k = ans.length;
+        System.out.println("----- Array -  combine --------");
+//        combineArrays(primitiveArray, objectArray);
+//        combineArrays(stras, strbs);
+//        combineArrays(d1, d2);
 
-        while (k > 0) {
-            ans[k--] = (j < 0 || (i >= 0 && arra[i] >= arrb[j])) ? arra[i--] : arrb[j--];
-        }
+        System.out.println("----- Array -  Rotate --------");
+//        rotateArray(primitiveArray,2);
+//        rotateArray1(primitiveArray,2);
+        rotateArray2(primitiveArray,2);
+//        rotateArray3(primitiveArray, 13);
 
+        System.out.println("----- Array -  Reverse --------");
+//        char[] charArrs = {'p', 'e', 'r', 'f', 'e', 'c', 't', ' ',
+//                'm', 'a', 'k', 'e', 's', ' ',
+//                'p', 'r', 'a', 'c', 't', 'i', 'c', 'e'};
+//        reverseArray(charArrs);
+//        Stream.of(charArrs).forEach(System.out::print);
 
-        sortArray();
-
-        sumPrimitiveArray(primitiveArray);
-        sumIntegerArray(objectArray);
-
-        convertIntArraytoIntegerArray(primitiveArray);
-        convertIntegerArrayToIntArray(objectArray);
-
-        combineArrays(primitiveArray, objectArray);
-        combineArrays(stras, strbs);
-        combineArrays(d1, d2);
-
-        rotateArray3(primitiveArray, 13);
-
-        // Array operation
-        char[] charArrs = {'p', 'e', 'r', 'f', 'e', 'c', 't', ' ',
-                'm', 'a', 'k', 'e', 's', ' ',
-                'p', 'r', 'a', 'c', 't', 'i', 'c', 'e'};
-        reverseArray(charArrs);
-        Stream.of(charArrs).forEach(System.out::print);
 
     }
 
-    public static int[] merge2SortedArray(int[] a, int[] b) {
+    /**
+     *  No sc
+     * Given [1, 2, 3] and n = 1, you should return [3, 1, 2]
+     * @param arr
+     */
+    public static void tryme(int[] arr){
 
+    }
+
+    public static int[] merge2SortedArray3(int[] a, int[] b) {  // tc : n+m
+        int[] ans = new int[a.length + b.length];
+        System.arraycopy(a,0,ans,0,a.length);
+        System.arraycopy(b, 0, ans,  a.length, b.length);
+        Arrays.sort(ans);
+        return ans;
+    }
+    /*
+        all a[i] conditions are met , then a[i],  rest wll be all b[j]
+        and vice verse
+     */
+    public static int[] merge2SortedArray2(int[] a, int[] b) {  // one liner
+        int[] answer = new int[a.length + b.length];
+        int i = a.length - 1, j = b.length - 1, k = answer.length;
+        while (k > 0)
+            answer[--k] = (j < 0 || (i >= 0 && a[i] >= b[j])) ? a[i--] : b[j--];
+//        while ( k >=0){
+//            answer[k--] = (j >= 0 && a[i] <= b[j]) || (i < 0 ) ? b[j--] : a[i--];
+//        }
+        return answer;
+    }
+
+    public static int[] merge2SortedArray(int[] a, int[] b) {
         int[] answer = new int[a.length + b.length];
         int i = 0, j = 0, k = 0;
 
@@ -69,21 +97,7 @@ public class ArrayTest {
         return answer;
     }
 
-    /*
-         in case j < 0, b is already exhausted, so we keep adding the remaining a elements to the answer array
 
-         1,2,3,10
-         4,5
-
-     */
-    public static int[] merge2SortedArray2(int[] a, int[] b) {  // one liner
-        int[] answer = new int[a.length + b.length];
-        int i = a.length - 1, j = b.length - 1, k = answer.length;
-
-        while (k > 0)
-            answer[--k] = (j < 0 || (i >= 0 && a[i] >= b[j])) ? a[i--] : b[j--];
-        return answer;
-    }
 
     /*
             Arrays.binarySearch(charArr,charKey));
@@ -92,7 +106,7 @@ public class ArrayTest {
             Arrays.copyOf(existingarray, newlength)
             Arrays.toString(array) to debug
             Arrays.sort(array,Collections.reverseOrder)
-            System.copyarray(src,start,dest,start,length)
+            System.copyarray(src,start,dest,start,howmany)
      */
     private static void sortArray() {
         String[] a = {"2", "4", "6"};
@@ -101,13 +115,15 @@ public class ArrayTest {
         // combine
         String[] newArray = Arrays.copyOf(a, a.length + b.length);
         System.arraycopy(b, 0, newArray, a.length, b.length);
-
-        Arrays.sort(newArray);
         System.out.println(Arrays.toString(newArray));
     }
 
 
     /*
+       Rotate from left to right   offset
+       Rotate from right to left   length - offset ( using left to right )
+
+
        Given [1, 2, 3] and n = 1, you should return [3, 1, 2]
        Given [1, 2, 3, 4, 5] and n = 3, you should return [3, 4, 5, 1, 2]
    */
@@ -136,7 +152,7 @@ public class ArrayTest {
     }
 
     /**
-     * calcuate remainder.  tricky one
+     * calculate remainder.  seems not right
      */
     private static void rotateArray1(int[] arr, int k) {
         if (k > arr.length)
@@ -152,13 +168,14 @@ public class ArrayTest {
     }
 
     /**
-     * break into 2 sections and System.copyarray
+     *  trick: copy 3 times
      */
-    public void rotateArray2(int[] arr, int k) {
+    public static void rotateArray2(int[] arr, int k) {
         if (k > arr.length)
             k = k % arr.length;
 
-        // shift and copy:   Partitions: 1. move old tail to the new head 2. move old rest to the new tail.
+        // shift and copy:
+        // Partitions: 1. move old tail to the new head 2. move old rest to the new tail.
         int[] tmp = new int[arr.length];
         System.arraycopy(arr, arr.length - k, tmp, 0, k);
         System.arraycopy(arr, 0, tmp, k, arr.length - k);
@@ -166,7 +183,9 @@ public class ArrayTest {
     }
 
     /*
-        Reversal way
+        Trick: reverse 3 times is enough
+
+
         Rotate array to the right by k steps.
         input : 1,2,3,4,5,6,7  and k = 2  or k = 9
         output: 6,7,1,2,3,4,5
@@ -178,6 +197,7 @@ public class ArrayTest {
     private static void rotateArray3(int[] arr, int k) {
         if (arr == null || arr.length == 0) return;
         if (k > arr.length) k %= arr.length;
+        if (k == 0)  return ; // like never moved.
 
         reverse(arr, 0, arr.length - 1); // reverse the whole array
         reverse(arr, 0, k - 1);   // reverse 1st section
@@ -185,8 +205,6 @@ public class ArrayTest {
 
         IntStream.of(arr).forEach(System.out::println);
     }
-
-
     private static void reverse(int[] arr, int l, int r) {
         while (l < r) {
             int tmp = arr[l];
