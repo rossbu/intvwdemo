@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.corejava;
+package com.shareforever.intvwdemo.corejava.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

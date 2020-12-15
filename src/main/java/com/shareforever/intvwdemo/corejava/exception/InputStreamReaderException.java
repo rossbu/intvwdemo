@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.corejava;
+package com.shareforever.intvwdemo.corejava.exception;
 
 import java.io.*;
 import java.util.*;

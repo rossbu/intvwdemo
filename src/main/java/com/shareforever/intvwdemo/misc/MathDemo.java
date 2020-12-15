@@ -33,7 +33,7 @@ public class MathDemo {
     public static void main(String[] args) {
         // bsil
         byte anum = 126;             // Integer (whole number) This can be used instead of int or other integer types to save memory when you are certain that the value will be within -128 and 127
-        short bnum = 23456;         // Integer (whole number) The short data type can store whole numbers from -32768 to 32767
+        short bnum = 23456;          // Integer (whole number) The short data type can store whole numbers from -32768 to 32767
         int cnum = 2147483647;       // Integer (whole number) The int data type can store whole numbers from -2147483648 to 2147483647
         long dnum = 69747979343932L; // Integer (whole number) -9223372036854775808 to 9223372036854775807
 
@@ -45,12 +45,26 @@ public class MathDemo {
         char myLetter = 'D';         // Character
         boolean myBool = true;       // Boolean
         String myText = "Hello";     // String
+        StringBuilder sb = new StringBuilder("buildertest");
+        StringBuffer sbf = new StringBuffer("bufftest");
 
+
+        bytefloatDoubleTest();
         betterDecimal();
         divisionTest();
         decimalTest();
         calculateTotalCost(12, 20, 8);
         bigDecimalRound(12, 20, 8);
+    }
+
+    private static void bytefloatDoubleTest() {
+        int i;
+        float f = 2.3f;
+        double d = 2.7;
+        i = ((int)Math.ceil(f)) * ((int)Math.round(d));
+        System.out.println(i);
+        byte b = 1;
+        //        b = b +1; compilation error   byte = byte + int is not allowed, change b to int will work
     }
 
     private static void betterDecimal() {
@@ -59,7 +73,7 @@ public class MathDemo {
         double c = b - a;
         System.out.println(c);
 
-        BigDecimal _a = new BigDecimal("0.02");
+        BigDecimal _a = new BigDecimal("0.02");  // better than double
         BigDecimal _b = new BigDecimal("0.03");
         BigDecimal _c = _b.subtract(_a);
         System.out.println(_c);
@@ -71,7 +85,6 @@ public class MathDemo {
         double d1 = 10;
         double d2 = 3;
         System.out.println("Double:\t 10 / 3 = " + (d1 / d2));
-
 
         BigDecimal bd3 = new BigDecimal("10");
         BigDecimal bd4 = new BigDecimal("3");

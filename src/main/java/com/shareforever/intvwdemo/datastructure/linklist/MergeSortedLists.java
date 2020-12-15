@@ -1,6 +1,6 @@
 package com.shareforever.intvwdemo.datastructure.linklist;
 
-public class Merge2SortLists {
+public class MergeSortedLists {
     ListNode head;
 
     static class ListNode {
@@ -36,8 +36,8 @@ public class Merge2SortLists {
     }
 
     public static void main(String[] args) {
-        Merge2SortLists llist1 = new Merge2SortLists();
-        Merge2SortLists llist2 = new Merge2SortLists();
+        MergeSortedLists llist1 = new MergeSortedLists();
+        MergeSortedLists llist2 = new MergeSortedLists();
         llist1.addToTheLast(new ListNode(1));
         llist1.addToTheLast(new ListNode(5));
         llist1.addToTheLast(new ListNode(10));

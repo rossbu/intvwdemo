@@ -1,7 +1,7 @@
 package com.shareforever.intvwdemo.collections;
 
 
-import com.shareforever.intvwdemo.misc.pojo.Person;
+import com.shareforever.intvwdemo.pojo.Person;
 
 import java.util.ArrayList;
 import java.util.List;

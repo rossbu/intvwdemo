@@ -4,7 +4,9 @@ package com.shareforever.intvwdemo.datastructure.linklist;
 /*
     https://www.hackerrank.com/challenges/30-linked-list/problem
 
-    Complete the insert function in your editor so that it creates a new Node (pass  as the Node constructor argument) and inserts it at the tail of the linked list referenced by the  parameter. Once the new node is added, return the reference to the  node.
+    Complete the insert function in your editor so that it creates a new Node (pass  as the Node constructor argument)
+    and inserts it at the tail of the linked list referenced by the  parameter.
+    Once the new node is added, return the reference to the  node.
 
     Note: If the  argument passed to the insert function is null, then the initial list is empty.
 
@@ -30,6 +32,7 @@ package com.shareforever.intvwdemo.datastructure.linklist;
     3
     4
     1
+
     Sample Output
 
     The locked code in your editor prints the ordered data values for each element in your list as a single line of space-separated integers:

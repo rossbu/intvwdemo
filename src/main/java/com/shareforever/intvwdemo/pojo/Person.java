@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.misc.pojo;
+package com.shareforever.intvwdemo.pojo;
 
 
 import java.util.List;

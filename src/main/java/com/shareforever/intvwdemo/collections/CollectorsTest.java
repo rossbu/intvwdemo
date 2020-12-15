@@ -38,22 +38,25 @@ public class CollectorsTest {
     }
 
     /*
+        https://www.logicbig.com/how-to/code-snippets/jcode-java-8-streams-collectors-reducing.html   -- with 3 good examples
+
         Collectors.reducing( a, b, c) :  explanation
-        The first one is an identity. When reducing a stream, you have to start somewhere (otherwise, what would be the result of reducing an empty list?).
+
+        Bu's lang:   startingValue, MapperOrTransformer , Aggregator
+
+        The 1st argument is an identity. When reducing a stream, you have to start somewhere (otherwise, what would be the result of reducing an empty list?).
         The identity is the object applied to the first argument of the first reduction operation in the chain
 
-        The second one is a mapper. reducing() is a generalized operation - you can reduce elements of a stream of type T into a final result of type U,
+        The 2nd argument is a mapper,  reducing() is a generalized operation - you can reduce elements of a stream of type T into a final result of type U,
         so you have to give an intermediate operation that provides a type U element from a type T element.
         If T == U and you don't want a transformation, you can provide an identity function here
 
-        The third argument is the reduction function - this is the one applied to elements of the stream in sequence, starting from the identity
+        The 3rd argument is the reduction function - this is the one applied to elements of the stream in sequence, starting from the identity
 
         e.g.
         Collectors.reducing(0, x -> x, (x, y) -> x + y)   : sum
         Collectors.reducing(0, String::length, (x, y) -> x + y).
 
-
-        https://www.logicbig.com/how-to/code-snippets/jcode-java-8-streams-collectors-reducing.html
 
         <T> Collector<T,?,Optional<T>> reducing(BinaryOperator<T> op)  -- 1 parameter
 
@@ -64,18 +67,18 @@ public class CollectorsTest {
                                     Function<? super T,? extends U> mapper,
                                     BinaryOperator<U> op)  -- 3 parameters
 
-        https://www.logicbig.com/how-to/code-snippets/jcode-java-8-streams-collectors-reducing.html   -- with 3 good examples
      */
     private static void reducing(int[] a, String[] strs) {
 
-        // use sum and initial value of sum result
-        int withStartingValue = IntStream.of(a).reduce(2, Integer::sum);  // 2 more
-        System.out.println("starting at 2, the sum is :" + withStartingValue);
+        // use sum and initial value of sum result  and example data:    int[] a = {-1, -3, -3, 4, 2, 2};
+        int withStartingValue = IntStream.of(a).reduce(2, Integer::sum);
+        System.out.println("starting with init value 2  which means 2+ (-1) + (-3) + 4 + 2 + 2 = 3 , the sum is :" + withStartingValue);
 
         withStartingValue = Arrays.stream(a).reduce(Integer::sum).orElse(-1);
+        System.out.println("starting with init value 0, the sum is :" + withStartingValue);
 
         // use sum directly on int
-        int sum1 = IntStream.of(a).sum();
+        int sum1 = IntStream.of(a).sum();  // sum() is actually implmented by doing reduce(0, Integer::sum);
 
         // use Collectors.reducing
         int sum2 = IntStream.of(a)
@@ -84,14 +87,15 @@ public class CollectorsTest {
         System.out.println("reducing to sum : " + sum2);
 
         // 1 parameter -  BinaryOperator, but remember it returns Optional
-        Optional<Integer> optionalInteger = IntStream.of(a)
+        Optional<Integer> sum3 =
+                IntStream.of(a)
                 .boxed()
                 .collect(Collectors.reducing((x, y) -> x + y));
 
-        // 2 parameters ( identity as starting point, binaryoperator )
+        // 2 parameters ( identity as init value, binaryoperator )
         String newStrs = Stream.of(strs)
                 .collect(Collectors.reducing("", (x, y) -> x + y));
-        System.out.println("reducing to by concating all strings :" + newStrs);
+        System.out.println("reducing to by concatenating all strings :" + newStrs);
 
         // 3 parameters ( identity, mapper, BinaryOperator), 2nd mapper converts String -> int  ( T -> U )  , then 3rd one applys each int with plus ( x+y)
         int lengthSum = Stream.of(strs)
@@ -121,7 +125,6 @@ public class CollectorsTest {
     private static String counting(int[] a, int k) {
         long onTimeStudents = 0L;
         int intNumOfStudents = 0;
-        TreeMap<Integer, Integer> treeMap = new TreeMap<Integer, Integer>();
 
         {  // use filter.count
             onTimeStudents =
@@ -147,7 +150,7 @@ public class CollectorsTest {
         { // group the student per on-time or late-time
             Map<Integer, Long> map = IntStream.of(a).boxed()
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-            System.out.println("groupingBy: " + map.toString());
+            System.out.println("groupingBy: " + map.toString() +"\n");
         }
 
         return "wow";
@@ -175,9 +178,10 @@ public class CollectorsTest {
 
         Stream<String[]>
                 Ss1 = Stream
-                .of(new String[][]{{"GFG", "GeeksForGeeks"},
-                        {"g", "geeks"},
-                        {"GFG", "Geeks"}});
+                .of(new String[][]{{"tbu", "Play"},
+                        {"kun", "Chat"},
+                        {"tbu", "Study"},
+                        {"Mia", "MonKeyBar"}});
 
         // Get Map from String
         // using toMap() method
@@ -185,10 +189,10 @@ public class CollectorsTest {
                 map2 = Ss1
                 .collect(Collectors
                         .toMap(
-                                p -> p[0], p -> p[1], (s, a) -> s + "-" + a, LinkedHashMap::new));
+                                p -> p[0], p -> p[1], (s, a) -> s + " | " + a, LinkedHashMap::new));
 
         // Print the Map
-        System.out.println("Map:" + map2);
+        System.out.println("Map:" + map2 + "\n");
     }
 
 

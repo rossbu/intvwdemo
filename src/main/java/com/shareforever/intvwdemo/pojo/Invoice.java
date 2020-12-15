@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.misc.pojo;
+package com.shareforever.intvwdemo.pojo;
 
 public class Invoice {
     public static String formatId(String oldId) {

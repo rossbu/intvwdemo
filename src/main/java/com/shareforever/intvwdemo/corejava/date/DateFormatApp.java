@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.corejava;
+package com.shareforever.intvwdemo.corejava.date;
 
 import java.io.*;
 import java.time.format.DateTimeFormatter;

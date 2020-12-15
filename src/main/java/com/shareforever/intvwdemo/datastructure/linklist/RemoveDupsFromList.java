@@ -6,9 +6,9 @@ import java.util.HashSet;
 /*
     Detect loop in a linked list
     Remove duplicate from sorted or unsorted linkedList
-
+    but without introducing any buffer
  */
-public class MyLinkedList {
+public class RemoveDupsFromList {
 
     Node head;
 
@@ -27,7 +27,7 @@ public class MyLinkedList {
     public static void main(String args[]) {
 
         // sorted
-        MyLinkedList llist = new MyLinkedList();
+        RemoveDupsFromList llist = new RemoveDupsFromList();
         llist.push(20);
         llist.push(13);
         llist.push(13);
@@ -37,7 +37,7 @@ public class MyLinkedList {
         llist.display();
 
         // unsorted
-        llist = new MyLinkedList();
+        llist = new RemoveDupsFromList();
         llist.push(15);
         llist.push(15);
         llist.push(13);

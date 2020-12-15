@@ -1,0 +1,192 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+
+/*
+
+We are working on a security system for a badged-access room in our company's building.
+
+Given an ordered list of employees who used their badge to enter or exit the room, write a function that returns two collections:
+
+1. All employees who didn't use their badge while exiting the room - they recorded an enter without a matching exit. (All employees are required to leave the room before the log ends.)
+
+2. All employees who didn't use their badge while entering the room - they recorded an exit without a matching enter. (The room is empty when the log begins.)
+
+Each collection should contain no duplicates, regardless of how many times a given employee matches the criteria for belonging to it.
+
+badge_records_1 = [
+  ["Martha",   "exit"],
+  ["Paul",     "enter"],
+  ["Martha",   "enter"],
+  ["Martha",   "exit"],
+  ["Jennifer", "enter"],
+  ["Paul",     "enter"],
+  ["Curtis",   "exit"],
+  ["Curtis",   "enter"],
+  ["Paul",     "exit"],
+  ["Martha",   "enter"],
+  ["Martha",   "exit"],
+  ["Jennifer", "exit"],
+  ["Paul",     "enter"],
+  ["Paul",     "enter"],
+  ["Martha",   "exit"],
+]
+                  enter w/o exit         exit w/o enter
+Expected output: ["Curtis", "Paul"], ["Martha", "Curtis"]
+
+Additional test cases:
+
+badge_records_2 = [
+  ["Paul", "enter"],
+  ["Paul", "enter"],
+  ["Paul", "exit"],
+]
+
+Expected output: ["Paul"], []
+
+badge_records_3 = [
+  ["Paul", "enter"],
+  ["Paul", "exit"],
+  ["Paul", "exit"],
+]
+
+Expected output: [], ["Paul"]
+
+badge_records_4 = [
+  ["Paul", "exit"],
+  ["Paul", "enter"],
+  ["Martha", "enter"],
+  ["Martha", "exit"],
+]
+
+Expected output: ["Paul"], ["Paul"]
+
+badge_records_5 = [
+  ["Paul", "enter"],
+  ["Paul", "exit"],
+]
+
+Expected output: [], []
+
+badge_records_6 = [
+  ["Paul", "enter"],
+  ["Paul", "enter"],
+  ["Paul", "exit"],
+  ["Paul", "exit"],
+]
+
+Expected output: ["Paul"], ["Paul"]
+
+n: length of the badge records array
+
+
+*/
+
+
+public class Solution {
+  public static void main(String[] argv) {
+
+    String badgeRecords2[][] = new String[][] {
+      {"Paul", "enter"},
+      {"Paul", "enter"},
+      {"Paul", "exit"},
+    };
+
+    String badgeRecords3[][] = new String[][] {
+      {"Paul", "enter"},
+      {"Paul", "exit"},
+      {"Paul", "exit"},
+    };
+
+    String badgeRecords4[][] = new String[][] {
+      {"Paul", "exit"},
+      {"Paul", "enter"},
+      {"Martha", "enter"},
+      {"Martha", "exit"},
+    };
+
+    String badgeRecords5[][] = new String[][] {
+      {"Paul", "enter"},
+      {"Paul", "exit"},
+    };
+
+    String badgeRecords6[][] = new String[][] {
+      {"Paul", "enter"},
+      {"Paul", "enter"},
+      {"Paul", "exit"},
+      {"Paul", "exit"},
+    };
+
+      String badgeRecords1[][] = new String[][] {
+      {"Martha",   "exit"},
+      {"Paul",     "enter"},
+      {"Martha",   "enter"},
+      {"Martha",   "exit"},
+      {"Jennifer", "enter"},
+      {"Paul",     "enter"},
+      {"Curtis",   "exit"},
+      {"Curtis",   "enter"},
+      {"Paul",     "exit"},
+      {"Martha",   "enter"},
+      {"Martha",   "exit"},
+      {"Jennifer", "exit"},
+      {"Paul",     "enter"},
+      {"Paul",     "enter"},
+      {"Martha",   "exit"},
+    };
+  }
+   // implemention
+    static void checkViolation(String[][] records){
+      int idx = records.length;
+
+
+      // person -> stack
+      HashMap<String,Stack> actionMap = new HashMap<String,Stack>();
+
+      while ( idx++ > 0 ){ // loop all records
+        Stack stack = new Stack();
+        String name = records[idx][0];
+        String action = records[idx][1];
+
+        stack.push(action);
+        actionMap.put(name,stack);
+
+        // check the rest of records from idx to the end
+        for ( int i = idx ; i< records.length; i++){
+
+          String n = records[i][0];
+          String nextAction = records[i][1];
+
+          if (n.equals(name)){
+            // check the action against stack
+            Stack stack1 = actionMap.get(name);
+            String previousAction = stack1.pop();
+            // previousAction and nextAction should be pair enter--exit
+            checkValidity(previousAction,nextAction);
+
+          }
+
+        }
+
+      }
+
+
+    }  // checkViolation
+    static boolean checkValidity(String previousAction, String nextAction){
+
+
+
+      if ( previousAction.equals("exit"){
+
+
+      }
+
+      if ( previousAction.equals("enter") && !nextAction.equals("exit")){
+
+      }
+
+    }
+
+
+
+}

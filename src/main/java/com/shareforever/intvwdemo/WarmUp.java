@@ -10,80 +10,89 @@ public class WarmUp {
         String[] testcases = new String[]{"abcd", null, "", "aaaa", "abcaaa","a","abc"};
         int[] testcasesInt = new int[]{Integer.MIN_VALUE,1,555,Integer.MAX_VALUE};
         System.out.println("------------------------------------------------------");
-        System.out.println("------------------------------------------------------");
         System.out.println("------------------ LET'S WARM UP ---------------------");
-        System.out.println("------------------------------------------------------");
         System.out.println("------------------------------------------------------");
 
         // is num has a square foot
         System.out.println("num 4: " + isSquare(4));
 
         // given 456789, need to print 101010
-        String result11 = evenOneOddZero(5);
-        System.out.println("evenOneOddZero : " + result11);
+        evenOneOddZero(456789);
 
         // int[] to Integer[] ,  Integer[] to int[]
         int[] arr2 = new int[]{54, 432, 53, 21, 43, 12, 45, 11, 10, 9};
         int[] sameArr2 = intToIntegerThenToInt(arr2);
 
-        // isAllSame
+        System.out.println("\nisAllSame");
         for (String s : testcases) {
             boolean isUnique = isAllSame(s);
             System.out.println(s + " : " + isUnique);
         }
 
-        // isAllUnique
+        System.out.println("isAllUnique");
         for (String s : testcases) {
             boolean isUnique = isAllUnique(s);
             System.out.println(s + " : " + isUnique);
         }
 
-        // fizzbuzz  -- warmup your fingers =  divisible by 3 fizz, divisible by 5 : fuzz,  divisible by 3 and 5 then fizzbuzz
-        fizzbuzz();
 
         // Fibonacci  0,1,1,2,3,5,8... -- PUB -- fib(0) = 0, fib(1) = 1, fib(2) = 1
         int result = fibRecursive(10);
-        System.out.println("fib:" + result);
+        System.out.println("fibRecurisve: " + result);
 
         // Fibonacci Recursive  3 vars :  PP, P, C  ( prevprev, prev and current in for loop)
         result = fibIterative(10);
-        System.out.println("fibRecurisve:" + result);
+        System.out.println("fibInterative: " + result);
 
         // factorial  5*4*3*2*1
-        int factorial = factorial(6);
+        int factorial = factorialRecursive(6);
+        System.out.println("factorialRecursive:" + factorial);
         factorial = factorialIterative(6);
-        System.out.println("factorial:" + factorial);
+        System.out.println("factorialIterative:" + factorial);
 
         // reverse xyzu to uzyx with recursive method -- PUB
         String test = "xyzu";
-        String teststr = reverse(test);
+        String teststr = reverseRecursively(test);
+        String reversed = test.chars()
+                .mapToObj(c -> (char)c)
+                .reduce("", (s,c) -> c+s, (s1,s2) -> s2+s1);
         System.out.println("reverse:" + teststr);
 
         // reverse int[] array
+        System.out.println("reverse an int Array");
         int[] arr3 = new int[]{54, 432, 53, 21, 43, 12, 45, 11, 10, 9};
         reverseIntArray(arr3);
 
-        // reverse int value like 12345  to 54321 without using array
+        // reverse Iterativaly
         int originalInt = 1234;
-        int reversedNumber = reverseIntNumber(originalInt);
+        int reverseIterativeNumber = reverseIterative(originalInt);
+        System.out.println("reverseIterativeNumber : " + reverseIterativeNumber);
 
-        // reverse a number recursively
-        int ans = 0;
-        ans =  reverseIntNumberRecursively(originalInt,ans);
-        System.out.println(ans);
-
+        // reverse Recursively
+        int reverseRecursiveInt = 12345;
+        reverseRecursiveInt =  reverseRecursive(originalInt,reverseRecursiveInt);
+        System.out.println("reverseRecursiveInt : " + reverseRecursiveInt);
 
     }
+
+
+
+
+
+
     public static boolean isSquare(int n) {
         return Math.sqrt(n) % 1.0d == 0.0d;
     }
 
-    public static String evenOneOddZero(int num) {
-        String result = "";
-        for (int i = 0; i < num; i++) {
-            result += i % 2 == 0 ? "1" : "0";
+    public static void evenOneOddZero(int num) {
+        String tmp = String.valueOf(num);
+        String[] tempstr = tmp.split("");
+        for ( String s : tempstr){
+            if ( Integer.valueOf(s) % 2 == 0 )
+                System.out.print("1");
+            else
+                System.out.print( "0");
         }
-        return result;
     }
 
     private static void fizzbuzz() {
@@ -105,6 +114,9 @@ public class WarmUp {
 
     private static boolean isAllUnique(String s) {
         if (s == null || s.length() <= 1) return false;
+        if (true)
+            return s.chars().distinct().count() == s.length();
+
         int len = s.length();
         char[] chars = s.toCharArray();
         boolean isUnique = false;
@@ -131,6 +143,9 @@ public class WarmUp {
     }
 
     private static boolean isAllSame(String s) {
+
+        if ( s == null || s.length() == 0 ) return true;
+
 
 
         // M1 , check if all match the first one or last one
@@ -172,14 +187,14 @@ public class WarmUp {
         d. Divide the input by 10, (removing the rightmost digit). (1234 / 10) = 123
         e. Repeat at step a with 123
      */
-    private static int reverseIntNumber(int originalInt) {
+    private static int reverseIterative(int originalInt) {
 
         // so if argument is a string, you need to think more carefully it's it's overflown for int,
         // so use long would be better or ask interviewer for that aquesiton.  use Long or Int
         // try do while instead of while , same
         int reversedNum = 0;
         while (originalInt != 0) {
-            reversedNum = reversedNum * 10;   // shift
+            reversedNum = reversedNum * 10;   // shittttttttt, this is tricky part
             reversedNum = reversedNum + originalInt % 10;   // with extract off the right most number
             originalInt = originalInt / 10;   // remove the right most number off original one
         }
@@ -187,24 +202,29 @@ public class WarmUp {
         return reversedNum;
     }
 
-    static int reverseIntNumberRecursively(int n, int ans){
+    static int reverseRecursive(int n, int ans){
         if ( n == 0) return ans;
         int remainder = n % 10;
         int quotient = n /10 ;
         ans = ans * 10 + remainder;
-        return reverseIntNumberRecursively(quotient,ans); // when reaching the end, return 4 times in the stack from bottom to top and done.
+        return reverseRecursive(quotient,ans); // when reaching the end, return 4 times in the stack from bottom to top and done.
     }
 
     private static void reverseIntArray(int[] arr) {
         System.out.println("------ reverse int [] ------- ");
-//        // reverse
-//        for ( int i=0 ; i< arr.length/2 ; i++){
-//            int t = arr[i];
-//            arr[i] = arr[arr.length-1-i];
-//            arr[arr.length-1-i] = t;
-//        }
+        // swap
+        for ( int i=0 ; i< arr.length/2 ; i++){
+            int t = arr[i];
+            arr[i] = arr[arr.length-1-i];
+            arr[arr.length-1-i] = t;
+        }
 
-        // much simpler if just to print it out
+        // stream and locate from end to the beginning.
+        IntStream.range(0, arr.length)
+                .map( i -> arr[arr.length - i -1])
+                .forEachOrdered(System.out::println);
+
+        // only print
         int n = arr.length;
         while (n > 0) {
             System.out.print(arr[--n] + " ");
@@ -231,18 +251,6 @@ public class WarmUp {
             }
         }
         return -1;
-    }
-
-    private static int fibIterative(int nTh) {
-        int prevprev = 0;
-        int prev = 0;
-        int current = 1;
-        for (int i = 1; i < nTh; i++) {
-            prevprev = prev;
-            prev = current;
-            current = prevprev + prev;
-        }
-        return current;
     }
 
 
@@ -277,30 +285,44 @@ public class WarmUp {
     }
 
 
-    public static String reverse(String s) {
-        if (s.length() == 0) return "";
-        return reverse(s.substring(1)) + s.charAt(0);
+    public static String reverseRecursively(String s) {
+        if ( s.length() == 0) return "";
+        return reverseRecursively(s.substring(1)) + s.charAt(0);
     }
 
 
-    public static int factorial(int n) {
-        if (n == 1) return 1;
-        return n * factorial(n - 1);
+    public static int factorialRecursive(int n) {
+        if ( n == 0) return 1;
+        return n * factorialRecursive( n-1);
     }
+
     static int factorialIterative(int num){
         int product = 1;
-        while ( num >=1) {
-            product = product * num--;
+        while ( num > 1){
+            product  = product * num;
+            num--;
         }
         return product;
     }
 
     public static int fibRecursive(int n) {
         if (n == 0) return 0;
-
         if (n == 1) return 1;
-
         return fibRecursive(n - 1) + fibRecursive(n - 2);
+    }
+
+
+    private static int fibIterative(int nTh) {
+        int prepre = 0 ;
+        int pre = 1 ;
+        int current = 1;
+
+        for ( int i  = 0 ; i < nTh-1; i++){
+            current = prepre + pre;
+            prepre = pre;
+            pre = current;
+        }
+        return current;
     }
 
 }

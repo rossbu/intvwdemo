@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.datastructure;
+package com.shareforever.intvwdemo.datastructure.set;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,6 +1,6 @@
 package com.shareforever.intvwdemo.corejava.keyword;
 
-import com.shareforever.intvwdemo.misc.pojo.Book;
+import com.shareforever.intvwdemo.pojo.Book;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;

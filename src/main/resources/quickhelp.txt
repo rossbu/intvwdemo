@@ -1,21 +1,52 @@
-
 ### Math
     x * 2  means  x << 1
     x / 2  meams  x >> 1
 
-###
-    Arrays,
-    Objects,
-    Collectors,
-    Comparators,
-    Collector.reverseOrder();
-    Collections
+### String
+    Arrays.copyOf(letters, len) // len is the length
+    S.substring(0,end);         //  end is the pointer ,  subString is to use new String() for 'substring', so create a new String object, == will be false.
+    System.out.println("z".substring(1).equals(""));  // return true
 
-###
-    use some
+### ++ --
+         // no need to do N >0 , and N--,  just in one statement.
+         while(idx-->0){
+            System.out.println(idx);  // idx decreased by 1 right after entering the loop
+         }
+
+        while (idx++<len){  // idx increased by 1 right after entering loop.
+            System.out.println(idx);
+            head = insert(head,array[idx]);
+        }
+
+        while (idx<len){
+            System.out.println(idx);
+            head = insert(head,array[idx]);
+            idx++;
+        }
+
+        int len = 0;
+        while( len--> 0) {
+            System.out.print(len+" ");  // -- is executed not matter true or false, so len == -1  after while
+        }
+        System.out.println(len);
+
+### Static var vs instance var
+        Static method can't access instance variable ( including non-static inner class) :  think when there is no instance at all. static method can be called. what would happen
+        Instance method can access static variable : think static variable as shared resource among all objects.
+
+
+###  if else output by lambda
     .orElseGet(1);
-            .ifPresentOrElse(System.out::println, () -> System.out.println("n/a"));
+    .ifPresentOrElse(System.out::println, () -> System.out.println("n/a"));
 
+
+### Utils
+    String              join
+    Arrays              sort, join, asList
+    Collections         sort,
+    Objects
+    Collectors
+    Comparators
 
 
 ### Array List collection
@@ -38,35 +69,26 @@ trick 3: String to Array
     char[] arr = s.toCharArray();
     for (char c : arr){ set.add(c);}                            // char[] to Set<Character>
 
-
     String str = String.join("", set);               //  HashSet<String> to String
     set.stream().collect(Collectors.joining());      //  HashSet<String> to String
 
 trick 4 : Collections to Array
-
     Integer[] array = hashSet.toArray(new Integer[hSetNumbers.size()]);   // Set to Integer[]   then you can use idx
     Integer[] array = list.toArray(new Integer[list.size()]);             // list to Integer[]
     String[] array = list.toArray(new String[list.size()]);               // list to String[]
     LinkedHashSet  set  = new LinkedHashSet(list)                // list to set
     List<Integer> list = new ArrayList<>( set );          // Set to List,        then you can use idx
 
-trick 5:
-    rotate string or reverse string can be done by 'subString(from,to)' function.
-
-trick 6:
-    int len = 0;
-    while( len--> 0) {
-        System.out.print(len+" ");  // -- is execusted not matter true or false, so it's -1
-    }
+trick 5 : String[]  to List<String>
+    String[] words = input.split(" ");
+    List<String> strings = Arrays.asList(words);
 
 trick 7:
-    Integer::sum       ===  (x,y) -> x+y      [ the sum function take 2 arguments, sum( int x, int y) ]
+    Integer::sum       ===  (x,y) -> x+y      [ the sum function take 2 arguments, sum( int x, int y) and return one result]
     Integer::intValue  ===  i -> i
     the trick is about the method signature :
         int  sum(int x, int y)
         int  intValue();     // knows the first i is implicitly used by lambda
-
-
 
 #### Below are some common type conversions
 
@@ -74,18 +96,25 @@ int[] to List   -> use collect ( ( List, Set or HashSet)
     List<Integer> list = IntStream.of(nums).boxed().collect(Collectors.toList());
 
 int[] to HashSet ( which can remove duplicates.)
-    HashSet<Integer> hashset = IntStream.of(array).boxed().collect(Collectors.toCollection(HashSet::new));
+    HashSet<Integer> hashset = IntStream.of(array).boxed()
+                                    .collect(Collectors.toCollection(HashSet::new));
+
+String[] to LinkedHashMap for typical frequency count
+    LinkedHashMap<String, Integer> hashset = IntStream.of(strArray).boxed()
+                                    .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e1, LinkedHashMap::new));
 
 int[] to Integer[]  -> use toArray
     int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     IntStream.of(arrs).mapToObj(e->e).toArray(Integer[]::new)
     IntStream.of(arrs).boxed().toArray(Integer[]::new);
 
-
 List to int[]
     int[] output = list.stream().mapToInt(Integer::intValue).toArray();
     int[] output = list.stream().mapToInt(i->i).toArray();
 
+char[] to stream
+    java.nio.CharBuffer.wrap(letters).chars().forEachOrdered(System.out::print);
+    aString.chars().forEachOrdered(System.out::print);
 
 IntStream, Arrays.stream ,Stream.of
     Arrays.stream(array)  // good
@@ -99,10 +128,6 @@ int[] initialization
     int[] array = new int[4];     // good
     be alert:  you can't reassign array[] to another array, you can only initalize the int[] once.
 
-String copy
-    Arrays.copyOf(letters, len) // len is the length
-    S.substring(0,end);         //  end is the pointer ,  subString is to use new String() for 'substring', so create a new String object, == will be false.
-
 char[] to IntStream
     IntStream is = "abcd".chars();
     char[] chars = s.toCharArray();
@@ -114,9 +139,6 @@ char[] to String
 
 
 ==================================================================================================================================
-
-
-
 
 
 SubString vs SubSequence vs SubSet vs Permutation
@@ -189,25 +211,6 @@ SubString vs SubSequence vs SubSet vs Permutation
         ZYX
         https://www.mathsisfun.com/combinatorics/combinations-permutations.html
 
-++ --  -->  for| while loop
-         // no need to do N >0 , and N--,  just in one statement.  while(idx-->0)
-         //
-
-        while (idx<len){
-            System.out.println(idx);
-            head = insert(head,array[idx]);
-            idx++;
-        }
-
-        while (idx++<len){  // idx increased by 1 right after entering loop.
-            System.out.println(idx);
-            head = insert(head,array[idx]);
-        }
-
-Static method can't access instance variable ( including non-static inner class) :  think when there is no instance at all. static method can be called. what would happen
-Instance method can access static variable : think static varaible as shared resource among all objects.
-
-
 
 Resources:
     20 String Algorithm Questions from Coding Interviews
@@ -218,3 +221,9 @@ Resources:
 
     30 Array Interview Questions and Answers for Programmers
     https://javarevisited.blogspot.com/2015/06/top-20-array-interview-questions-and-answers.html#ixzz6Y1vpXjF8
+
+    The Best of Java Interview Questions
+    https://dzone.com/articles/interview-question-cluster?edition=620310&utm_source=Weekly%20Digest&utm_medium=email&utm_campaign=Weekly%20Digest%202020-09-02
+
+    20 String interview questions
+    https://javarevisited.blogspot.com/2015/01/top-20-string-coding-interview-question-programming-interview.html

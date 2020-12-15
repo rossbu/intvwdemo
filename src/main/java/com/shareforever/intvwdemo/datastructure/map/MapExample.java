@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.datastructure;
+package com.shareforever.intvwdemo.datastructure.map;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;

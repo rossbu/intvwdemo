@@ -1,4 +1,4 @@
-package com.shareforever.intvwdemo.collections;
+package com.shareforever.intvwdemo.misc;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +38,8 @@ public class BiConsumerExp {
         exp.executeBiConsumer(BiConsumerExp::oneParamMethod, new BiConsumerExp("PARAM"), 999);
         BiConsumer<BiConsumerExp, Integer> biCon = (first, second) -> first.oneParamMethod(second);
         biCon.accept(new BiConsumerExp("PARAM"), 999);
-//      A method reference referencing an instance method having one argument actually has two arguments - the first argument is implicit - the instance on which the method is executed
+//      A method reference referencing an instance method having one argument actually has two arguments
+//      - the first argument is implicit - the instance on which the method is executed
 //      Experiment::oneParamMethod is equivalent to (Experiment e, Object o) -> e.oneParamMethod(o).
 
     }

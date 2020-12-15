@@ -1,0 +1,47 @@
+
+Interview with PARC (Palo Alto Research Center) on Tuesday (12/15) at 1:30 PM EST
+
+Tuesday 15th at 10:30am PST.
+
+The meeting will be via Microsoft Teams so we can share the candidate’s screen.   Below are instructions you can share the candidate.
+
+I would like the candidate to have downloaded the first two projects below and be prepared to review them in his IDE of choice.
+I would like to see the candidate execute a unit test and build each of the 1st two projects.
+For the 3rd project, we can review the code directly from the github site, the candidate does not need to download it unless they really wants to.  It’s a giant code base.
+
+
+The three projects are all related to basic CS algorithms.  The first two are 3rd-party algorithm libraries.
+The last is the OpenJdk 11 source code.  For the OpenJDK code, we will focus on the code under src/java.base/share/classes/java/util,
+particularly Arrays.sort and the related sorting algorithms, especially DualPivotQuicksort.java.
+I am interested in the Java code there, not the low-level C code or the giant build of the VM.
+
+
+https://github.com/TheAlgorithms/Java
+https://github.com/williamfiset/Algorithms
+https://github.com/openjdk/jdk11u/
+
+
+This will not be a quiz on sorting algorithms. I will mostly ask the candidate about the structure, APIs, code style, and what the candidate likes or dislikes about the code.
+Please think about software engineering ideas like information hiding, inversion of control, dependency inversion, documentation quality, unit tests, testability,
+complexity, consistency of the API, how the API supports extensibility, etc.
+We will talk about the candidate’s philosophy of software development and how they approaches coding.
+
+Job Description:
+
+Our Client is looking for a Sr. Software Developer with strong Java 11 coding skills. Please see below for information, responsibilities, and requirements.
+
+JOB DESCRIPTION:
+We need a software developer to work on the implementation of our client's IoT Configuration Security technology. The software written by the developer will be used toward our client's deliverables for a US government contract as well as for internal commercialization efforts.
+
+SKILLS NEEDED:
+
+Strong Java 11 coding skills and experience. (okay with Java 8 or 9)
+Good software engineering practices, including Javadoc and Junit 5. The candidate must be able to write their own unit tests.
+Should have experience with Gitlab, Gitlab CI/CD, maven, and make.
+
+Knowledge of the following is a plus:
+
+Databases, especially graph databases like Neo4j.
+Java-based json, especially Jackson 2.
+Java regular expressions, text processing, and Antlr4 parser.
+Domain Specific Language frameworks, such as xtext, or DSLs in Scala.

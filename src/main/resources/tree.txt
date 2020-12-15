@@ -1,6 +1,3 @@
-
-
-
 Min-Heap
     a parent is always less than all of its children, the least element always will be in the root of the tree.
 

@@ -1,7 +1,8 @@
-package com.shareforever.intvwdemo.datastructure;
+package com.shareforever.intvwdemo.datastructure.map;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -23,43 +24,38 @@ public class MapDemo {
 
         List<String> list = Arrays.asList("Geeks", "FOR", "GEEKSQUIZ", "Computer", "Science", "gfg");
 
-        // Using Stream map(Function mapper) and displaying the length of each String
-//        list.stream()
-//                .filter(e-> e!=null)
-//                .map(Book::getId)
-//                .collect(Book::new, Book::takeId, Book::takeme);
+        MapDemo hashTableDemo = new MapDemo();
+        hashTableDemo.hashTable();
+        hashTableDemo.hashMap();
 
-//
-//        MapDemo hashTableDemo = new MapDemo();
-//        hashTableDemo.hashTable();
-//        hashTableDemo.hashMap();
-//
-//        // 1. show 3 ways to create synchronized map:  natural hashtable, Collections.synchronizedMap, ConcurrentHashMap
-//        Map<String, String> normalMap = new Hashtable<String, String>();
-//        Map<String, String> synchronizedMap = Collections.synchronizedMap(new HashMap<String, String>());
-//        ConcurrentHashMap<String, String> concurrentHashMap = new ConcurrentHashMap<>();
-//        System.out.println("Show cases for ConcurrentMap > synchronizedMap > Hashtable");
-//
-//        // mergefunction in toMap
-//        // two Orders with the same code but different quantity of products for each one, and your desire is sum the quantities.
-//        List<Order> listOrders = new ArrayList<>();
-//        listOrders.add(new Order("COD_1", 1L));
-//        listOrders.add(new Order("COD_1", 5L));
-//        listOrders.add(new Order("COD_1", 3L));
-//        listOrders.add(new Order("COD_2", 3L));
-//        listOrders.add(new Order("COD_3", 4L));
-//        listOrders.stream().collect(Collectors.toMap(Order::getCode,
-//                o -> o.getQuantity(),
-//                (o1, o2) -> o1 + o2)); // merge/sum 1L, 5L, 3L for the same key COD_1
+        // 1. show 3 ways to create synchronized map:  natural hashtable, Collections.synchronizedMap, ConcurrentHashMap
+        Map<String, String> normalMap = new Hashtable<String, String>();
+        Map<String, String> synchronizedMap = Collections.synchronizedMap(new HashMap<String, String>());
+        ConcurrentHashMap<String, String> concurrentHashMap = new ConcurrentHashMap<>();
+        System.out.println("Show cases for ConcurrentMap > synchronizedMap > Hashtable");
+
+        // two Orders with the same code but different quantity of products for each one, and your desire is sum the quantities.
+        List<Order> listOrders = new ArrayList<>();
+        listOrders.add(new Order("COD_1", Float.valueOf(1L)));
+        listOrders.add(new Order("COD_1", Float.valueOf(5L)));
+        listOrders.add(new Order("COD_1", Float.valueOf(3L)));
+        listOrders.add(new Order("COD_2", Float.valueOf(2L)));
+        listOrders.add(new Order("COD_3", Float.valueOf(4L)));
+        listOrders.stream().collect(
+                Collectors.toMap(
+                        Order::getCode,
+                        Order::getQuantity,
+                        (o1, o2) -> o2,
+                        LinkedHashMap::new));
 
     }
 
 
     static class Order {
         private String code;
-        private float quantity;
+        private Float quantity;
 
-        public Order(String cod_1, long l) {
+        public Order(String cod_1, Float l) {
             this.code = cod_1;
             this.quantity = l;
         }
@@ -72,11 +68,11 @@ public class MapDemo {
             this.code = code;
         }
 
-        public float getQuantity() {
+        public Float getQuantity() {
             return quantity;
         }
 
-        public void setQuantity(float quantity) {
+        public void setQuantity(Float quantity) {
             this.quantity = quantity;
         }
     }
