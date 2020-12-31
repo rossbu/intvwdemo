@@ -681,8 +681,8 @@ public class MiddleLevel {
 
         // locate each element, and permute teh rest of it e.g. x then do yz
         for (int i = 0; i < s.length(); i++) {
-            String rest = s.substring(0, i) + s.substring(i + 1);
             char c = s.charAt(i);
+            String rest = s.substring(0, i) + s.substring(i + 1);
             permutation(rest, ans + c);
         }
 
@@ -712,11 +712,12 @@ public class MiddleLevel {
     }
 
     public static void swap(char[] arr, int l, int r) {
-        while (l < r) {
-            char t = arr[l];
-            arr[l++] = arr[r];
-            arr[r--] = t;
-        }
+       while ( l < r){
+           char temp =  arr[l];
+           arr[l++] = arr[r];
+           arr[r--] = temp;
+
+       }
     }
 
 

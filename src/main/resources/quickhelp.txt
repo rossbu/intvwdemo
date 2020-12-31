@@ -7,6 +7,7 @@
     S.substring(0,end);         //  end is the pointer ,  subString is to use new String() for 'substring', so create a new String object, == will be false.
     System.out.println("z".substring(1).equals(""));  // return true
 
+
 ### ++ --
          // no need to do N >0 , and N--,  just in one statement.
          while(idx-->0){

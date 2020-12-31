@@ -149,7 +149,7 @@ public class CollectorsTest {
 
         { // group the student per on-time or late-time
             Map<Integer, Long> map = IntStream.of(a).boxed()
-                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                    .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()));
             System.out.println("groupingBy: " + map.toString() +"\n");
         }
 
