@@ -9,7 +9,7 @@
 
 
 ### ++ --
-         // no need to do N >0 , and N--,  just in one statement.
+         // no need to do N > 0 , and N--,  just in one statement.
          while(idx-->0){
             System.out.println(idx);  // idx decreased by 1 right after entering the loop
          }

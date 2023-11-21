@@ -781,6 +781,7 @@ public class MiddleLevel {
 
         // LinkedHashset to ArrayList and get by index
         result = new ArrayList<Integer>(set1).get(k-1);
+
         return result;
     }
 

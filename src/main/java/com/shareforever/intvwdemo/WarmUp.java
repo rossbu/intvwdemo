@@ -3,6 +3,7 @@ package com.shareforever.intvwdemo;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class WarmUp {
     public static void main(String[] args) {
@@ -12,16 +13,22 @@ public class WarmUp {
         System.out.println("------------------------------------------------------");
         System.out.println("------------------ LET'S WARM UP ---------------------");
         System.out.println("------------------------------------------------------");
-
         // is num has a square foot
-        System.out.println("num 4: " + isSquare(4));
+        System.out.println("num 4 is squared? : " + isSquare(4));
 
-        // given 456789, need to print 101010
+        //  convert an integer to an array for each digit, for example:  123 -> [1,2,3]
+        convertAnIntegerToAnArray(123);
+
+        // convert int to array without using String or Integer methods
+        intToArray(123456);
+
+        // given any integer  such as 456789, print 1 if it is even, 0 if it is odd.
         evenOneOddZero(456789);
+
 
         // int[] to Integer[] ,  Integer[] to int[]
         int[] arr2 = new int[]{54, 432, 53, 21, 43, 12, 45, 11, 10, 9};
-        int[] sameArr2 = intToIntegerThenToInt(arr2);
+        intToIntegerThenToInt(arr2);
 
         System.out.println("\nisAllSame");
         for (String s : testcases) {
@@ -75,8 +82,15 @@ public class WarmUp {
 
     }
 
-
-
+    private static void convertAnIntegerToAnArray(int i) {
+    System.out.println("convertAnIntegerToAnArray");
+        int [] arr = new int[String.valueOf(i).length()];
+        String[] numStr = String.valueOf(i).split("");
+        for ( int j = 0 ; j < numStr.length ; j++) {
+            arr[j] = Integer.parseInt(numStr[j]);
+            System.out.println(arr[j]);
+        }
+    }
 
 
 
@@ -84,15 +98,43 @@ public class WarmUp {
         return Math.sqrt(n) % 1.0d == 0.0d;
     }
 
+
+    /*
+     given 12345, without using String or Integer methods, return array [1,2,3,4,5]
+     temp 5  num 1234
+     temp 4  num 123
+     temp 3  num 12
+     temp 2  num 1
+     temp 1  num 0
+     */
+    static void intToArray(int num){
+        if (num == 0 ) return;
+        int temp = num % 10;
+        num /= 10;
+        intToArray(num);
+    }
+
+
     public static void evenOneOddZero(int num) {
-        String tmp = String.valueOf(num);
-        String[] tempstr = tmp.split("");
-        for ( String s : tempstr){
-            if ( Integer.valueOf(s) % 2 == 0 )
-                System.out.print("1");
-            else
-                System.out.print( "0");
-        }
+        String[] numStr = String.valueOf(num).split("");
+        Stream.of(numStr).forEach(
+            s -> {
+                if (Integer.parseInt(s) % 2 == 0) {
+                    System.out.println("1");
+                } else {
+                    System.out.println("0");
+                }
+            }
+        );
+
+//        String tmp = String.valueOf(num);
+//        String[] tempstr = tmp.split("");
+//        for ( String s : tempstr){
+//            if ( Integer.valueOf(s) % 2 == 0 )
+//                System.out.print("1");
+//            else
+//                System.out.print( "0");
+//        }
     }
 
     private static void fizzbuzz() {
@@ -146,13 +188,11 @@ public class WarmUp {
 
         if ( s == null || s.length() == 0 ) return true;
 
-
-
         // M1 , check if all match the first one or last one
         boolean isSame = s.chars().allMatch(c -> c == s.charAt(0));
 
 
-        // M2: check if disinct and count equals 1
+        // M2: check if distinct and count equals 1
         isSame = s.chars().distinct().count() == 1 ? true : false;
 
         // M3: Hashing, then the set size should be 1
@@ -161,8 +201,9 @@ public class WarmUp {
         for (char c : chars) {
             characters.add(c);
         }
+        isSame = characters.size() == 1 ? true : false;
 
-        // M4 : one line hashsert
+        // M4: add all chars( from string) to set, then the set size should be 1
         s.chars().forEach( c -> characters.add((char)c));
         isSame = characters.size() == 1 ? true : false;
 
@@ -304,6 +345,7 @@ public class WarmUp {
         }
         return product;
     }
+
 
     public static int fibRecursive(int n) {
         if (n == 0) return 0;

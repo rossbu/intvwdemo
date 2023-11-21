@@ -52,7 +52,7 @@ public class MostFrequentWords {
 
         // put str into string[]
         String[] words = str.split(" ");
-
+        
         // put [ word, frequency ] in Map
         Map<String, Integer> map = new HashMap<>();
         for (String w : words) {

@@ -1,0 +1,28 @@
+input:
+    [A, B, C, D, E]
+    [ {A,B}, {B,C}, {C,D} {E,}, {A, F}, {A, G}]
+
+output:
+    [D, C,  B, A ]
+
+/*
+    A depends on B
+    B depends on C
+    D no depends
+/*
+
+
+
+void handleDependencies(List<String> list, List<Map<String, String>> relations){
+    // check edge cases
+
+
+    // create ds
+    List<String> outputList = new ArrayList<String>;
+
+
+    //
+
+
+
+}
