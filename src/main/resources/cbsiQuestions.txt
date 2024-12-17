@@ -1,6 +1,6 @@
 
 Req-1：
-	rest endpint collect user information
+	rest endpiont collect user information
 	Firstname, lastname, email , password
 
 	lib:
@@ -10,7 +10,7 @@ Req-1：
 		h2/mysql driver
 
 1.1 define the User object as request parameter
-1.2 create controller （ rest controller ) ,  service layer ( impl ).  Dao layer ( impl)
+1.2 create spring controller,  spring service layer,  JPA Dao layer
 1.3 Json support for request/response
 1.4 use H2 for DB prototyping,  ( migrate mysql later on )
 

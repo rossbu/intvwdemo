@@ -32,7 +32,7 @@ badge_records_1 = [
   ["Paul",     "enter"],
   ["Martha",   "exit"],
 ]
-                  enter w/o exit         exit w/o enter
+enter w/o exit         exit w/o enter
 Expected output: ["Curtis", "Paul"], ["Martha", "Curtis"]
 
 Additional test cases:
@@ -87,6 +87,24 @@ n: length of the badge records array
 public class Solution {
   public static void main(String[] argv) {
 
+    String badgeRecords1[][] = new String[][] {
+      {"Martha",   "exit"},
+      {"Paul",     "enter"},
+      {"Martha",   "enter"},
+      {"Martha",   "exit"},
+      {"Jennifer", "enter"},
+      {"Paul",     "enter"},
+      {"Curtis",   "exit"},
+      {"Curtis",   "enter"},
+      {"Paul",     "exit"},
+      {"Martha",   "enter"},
+      {"Martha",   "exit"},
+      {"Jennifer", "exit"},
+      {"Paul",     "enter"},
+      {"Paul",     "enter"},
+      {"Martha",   "exit"},
+    };
+
     String badgeRecords2[][] = new String[][] {
       {"Paul", "enter"},
       {"Paul", "enter"},
@@ -118,25 +136,12 @@ public class Solution {
       {"Paul", "exit"},
     };
 
-      String badgeRecords1[][] = new String[][] {
-      {"Martha",   "exit"},
-      {"Paul",     "enter"},
-      {"Martha",   "enter"},
-      {"Martha",   "exit"},
-      {"Jennifer", "enter"},
-      {"Paul",     "enter"},
-      {"Curtis",   "exit"},
-      {"Curtis",   "enter"},
-      {"Paul",     "exit"},
-      {"Martha",   "enter"},
-      {"Martha",   "exit"},
-      {"Jennifer", "exit"},
-      {"Paul",     "enter"},
-      {"Paul",     "enter"},
-      {"Martha",   "exit"},
-    };
+
   }
-   // implemention
+
+
+
+// implementation
     static void checkViolation(String[][] records){
       int idx = records.length;
 

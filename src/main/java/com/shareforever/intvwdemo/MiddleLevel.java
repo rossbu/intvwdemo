@@ -51,7 +51,8 @@ public class MiddleLevel {
         String missingString = findMissingString(src, target);
         System.out.println(missingString);
 
-        // occurrences of a target substring in a string. return a list of starting indexes e.g. ( 1, 5, 10)   means 'cat' starts at 1 , 5 and 7.
+        // occurrences of a target substring in a string. return a list of starting indexes
+        // e.g. ( 1, 5, 10)   means 'cat' starts at 1 , 5 and 7.
         String occurrenceStr = "cat cat dog cat dog seal cat";
         List<Integer> listOfIdx = occurrencesIndexes(occurrenceStr, "cat");
         listOfIdx.forEach(System.out::println);
@@ -71,7 +72,7 @@ public class MiddleLevel {
         String s = "XYZ";
         permutation(s, "");
 
-        // find non repeating chars
+        // find non_repeating chars
         String nrc1 = "ababyabj,cdeded";
         char c = findFirstNonRepeating(nrc1);
         System.out.println(c);
@@ -97,6 +98,7 @@ public class MiddleLevel {
 
         // find all divisors of an integer and sum them up and print it out.
         divisorSum(6);
+
         // find whether there are two integers x and y such that x^2 + y^2 is equal to a given positive number.
         sumOfSquareNum(81);
 
@@ -104,7 +106,6 @@ public class MiddleLevel {
         String duplicateString = "hi this is sample test";
         deleteDuplicateAndKeepTheLastOccurrence(duplicateString);
         deleteDuplicateAndKeepOrderWithFirstOccurrence(duplicateString);
-
 
         // rotate int arr by d steps to the right  e.g. d = 3 , then  5,6,7,1,2,3,4
         int seed[] = {1, 2, 3, 4, 5, 6, 7};
@@ -115,7 +116,6 @@ public class MiddleLevel {
         // rotate String
         String seedString = "iamacat";
         rotateLeft(seedString, 3);
-
 
         // joining string arrays
         List<String> listOfString = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl", "cat", "cat", "dog", "dog", "dog");
@@ -474,7 +474,6 @@ public class MiddleLevel {
             }
         }
 
-
         // method 2: removeAll
         List<String> srclist = Arrays.stream(srcArr).collect(Collectors.toList());
         List<String> src2list = Arrays.stream(targetArr).collect(Collectors.toList());
@@ -612,7 +611,8 @@ public class MiddleLevel {
         List<Integer> list = new ArrayList<>();
         for (int idx = 0; ; ) {
             idx = src.indexOf(target, idx);
-            if (idx < 0) break;
+            if (idx < 0)
+                break; // didn't find any more
             else {
                 list.add(idx);
                 idx += target.length();

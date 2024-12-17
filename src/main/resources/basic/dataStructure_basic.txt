@@ -9,9 +9,11 @@
 
 
 ### ++ --
-         // no need to do N > 0 , and N--,  just in one statement.
-         while(idx-->0){
-            System.out.println(idx);  // idx decreased by 1 right after entering the loop
+         // no need to do
+         N > 0 ;  N-- ;
+         instead just in one statement.
+         while(idx-->0){  // idx decreased by 1 right after entering the loop
+            System.out.println(idx);
          }
 
         while (idx++<len){  // idx increased by 1 right after entering loop.
@@ -32,7 +34,8 @@
         System.out.println(len);
 
 ### Static var vs instance var
-        Static method can't access instance variable ( including non-static inner class) :  think when there is no instance at all. static method can be called. what would happen
+        Static method can't access instance variable ( including non-static inner class) :
+        think when there is no instance at all. static method can be called. what would happen ?
         Instance method can access static variable : think static variable as shared resource among all objects.
 
 
@@ -52,15 +55,17 @@
 
 ### Array List collection
 
-trick 1:
-    Vector vs ArrayList :  Vector class that Stack extends is basically the "thread-safe" version of an ArrayList.
-    StringBuffer vs StringBuilder:   Buffer is safer , so it's internally synchronized , so it's slower
+Vector vs ArrayList :
+        Vector class that Stack extends is basically the "thread-safe" version of an ArrayList.
 
-trick 2:
+StringBuffer vs StringBuilder:
+        Buffer is safer and slower , because it's internally synchronized , so it's slower
+
+Division & Remainder
     use division and Remainder to calculate bills and boxes
     use /  to extract off right-most int number and  use % to remove the right more number. 1234 -> 123 and 4
 
-trick 3: String to Array
+String to Array
     String[] arr = "iam".split("");                 // String to String[]
     char[] arr = s.toCharArray();                   // String to char[]  -- 'i', 'a' ,'m'
     s.chars().forEach( e-> set.add((char)e));       // String to Set<Character>
@@ -73,23 +78,23 @@ trick 3: String to Array
     String str = String.join("", set);               //  HashSet<String> to String
     set.stream().collect(Collectors.joining());      //  HashSet<String> to String
 
-trick 4 : Collections to Array
-    Integer[] array = hashSet.toArray(new Integer[hSetNumbers.size()]);   // Set to Integer[]   then you can use idx
+Collections to Array
+    Integer[] array = hashSet.toArray(new Integer[hSetNumbers.size()]);   // Set to Integer[]  then you can use idx
     Integer[] array = list.toArray(new Integer[list.size()]);             // list to Integer[]
     String[] array = list.toArray(new String[list.size()]);               // list to String[]
     LinkedHashSet  set  = new LinkedHashSet(list)                // list to set
     List<Integer> list = new ArrayList<>( set );          // Set to List,        then you can use idx
 
-trick 5 : String[]  to List<String>
+String[]  to List<String>
     String[] words = input.split(" ");
     List<String> strings = Arrays.asList(words);
 
-trick 7:
-    Integer::sum       ===  (x,y) -> x+y      [ the sum function take 2 arguments, sum( int x, int y) and return one result]
+Operations
+    Integer::sum       ===  (x,y) -> x+y  [ the sum function take 2 arguments, sum( int x, int y) return one result]
     Integer::intValue  ===  i -> i
     the trick is about the method signature :
         int  sum(int x, int y)
-        int  intValue();     // knows the first i is implicitly used by lambda
+        int  intValue();         // knows the first i is implicitly used by lambda
 
 #### Below are some common type conversions
 
@@ -139,13 +144,13 @@ char[] to String
      Arrays.toString(chars);  // [u, z, y, x]  --  formatted with array [,] , which is automatically formatted  as array by Arrays.java
 
 
-==================================================================================================================================
-
+==================================================================================================================
 
 SubString vs SubSequence vs SubSet vs Permutation
 
     Substring :
-        A substring is a contiguous sequence of characters within a string, where order matters. substring is also a subsequence.
+        A substring is a contiguous sequence of characters within a string, where order matters.
+        A substring is also a subsequence.
         e.g: abbc
         a
         ab
@@ -177,8 +182,9 @@ SubString vs SubSequence vs SubSet vs Permutation
            |||
            ana
 
-    Subset :
-        any possible combinations of original set, For example, {1, 2, 3}, subset can be
+    Subset: A subset is a set that contains only elements that are in the original set.
+        formula : 2^n, where n is the number of elements in the set.
+        Combination : subset can be 2^3 possible combinations, For example, {1, 2, 3} has 8 subsets.
         {}
         {1}
         {2}
@@ -188,14 +194,22 @@ SubString vs SubSequence vs SubSet vs Permutation
         {2, 3}
         {1,2,3}   // whole set
 
-        Math:
-            Set        : 2^n
-            Proper Set : 2^n -1 , where n is the number of elements.
-            number of all possible subsets of A is 8 which is equal 2^3 = 8
-            proper subsets are 2^3 - 1 = 7
+
+    ProperSet: A proper subset of a set A is a subset of A that is not equal to A itself.
+            Formular:       2^n -1 , where n is the number of elements.
+            Combination:    number of all possible subsets of A is 8 which is equal 2^3 = 8
+            For example, {1, 2, 3} has 8 subsets ad 7 proper subsets (exclude the whole set)
+            {}
+            {1}
+            {2}
+            {3}
+            {1, 2}
+            {1, 3}
+            {2, 3}
 
         Note : set {3,2} and {2,3} is the same set ( Set has no orders).
-               For A = {red, blue} and B = {red, white, blue},  A ⊆ B since every element of A is also an element of B.
+               For A = {red, blue} and B = {red, white, blue},
+               A ⊆ B since every element of A is also an element of B.
                A set is a subset of itself since a set contains all its elements.
                the empty set is a subset of every set,
         link:

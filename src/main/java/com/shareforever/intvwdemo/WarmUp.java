@@ -1,22 +1,24 @@
 package com.shareforever.intvwdemo;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class WarmUp {
     public static void main(String[] args) {
-        // testcases
-        String[] testcases = new String[]{"abcd", null, "", "aaaa", "abcaaa","a","abc"};
-        int[] testcasesInt = new int[]{Integer.MIN_VALUE,1,555,Integer.MAX_VALUE};
+
+        int[] testcasesInt = new int[]{Integer.MIN_VALUE, 1, 555, Integer.MAX_VALUE};
+
         System.out.println("------------------------------------------------------");
         System.out.println("------------------ LET'S WARM UP ---------------------");
-        System.out.println("------------------------------------------------------");
+        System.out.println("------------------------------------------------------\n");
+
         // is num has a square foot
         System.out.println("num 4 is squared? : " + isSquare(4));
 
-        //  convert an integer to an array for each digit, for example:  123 -> [1,2,3]
+        // convert an integer to an array for each digit, for example:  123 -> [1,2,3]
         convertAnIntegerToAnArray(123);
 
         // convert int to array without using String or Integer methods
@@ -25,23 +27,57 @@ public class WarmUp {
         // given any integer  such as 456789, print 1 if it is even, 0 if it is odd.
         evenOneOddZero(456789);
 
-
         // int[] to Integer[] ,  Integer[] to int[]
         int[] arr2 = new int[]{54, 432, 53, 21, 43, 12, 45, 11, 10, 9};
         intToIntegerThenToInt(arr2);
 
-        System.out.println("\nisAllSame");
-        for (String s : testcases) {
+        System.out.println("------------------------------------------------------");
+        System.out.println("---------- String, Character Operations --------------");
+        System.out.println("------------------------------------------------------\n");
+
+        // sameness
+        String[] testcases_same = new String[]{"abcd", null, "", "aaaa", "abcaaa", "a", "abc"};
+        for (String s : testcases_same) {
             boolean isUnique = isAllSame(s);
             System.out.println(s + " : " + isUnique);
         }
 
-        System.out.println("isAllUnique");
-        for (String s : testcases) {
+        // uniqueness
+        String[] testcases_unique = new String[]{"abcd", null, "", "aaaa", "abcaaa", "a", "abc"};
+        for (String s : testcases_unique) {
             boolean isUnique = isAllUnique(s);
             System.out.println(s + " : " + isUnique);
         }
 
+        // reverse xyzu to uzyx - recursive
+        String test = "xyzu";
+        String reversedstr = reverseRecursively(test);
+        String reversedstr2 = test.chars()
+                .mapToObj(c -> (char)c)
+            .reduce("", (s, c) -> c + s, (s1, s2) -> s2 + s1);
+        // extending knowledge -1
+        // BiFunction<String, Character, String> -> 1st ele, 2nd ele and result
+        // BiFunction<String, Character, String> reverseConcat = (s, c) -> c + s;
+        // x + "" -> y + x, z +yx, u + zyx
+        // c + s  -> c + s, c + s, c + s
+        System.out.println("reversed_1: " + reversedstr);
+        System.out.println("reversed_2: " + reversedstr2);
+
+        // reverse int[] array
+        int[] arr3 = new int[]{54, 432, 53, 21, 43, 12, 45, 11, 10, 9};
+        reverseIntArray(arr3);
+
+        // reverse 12345 Iteratively
+        int originalInt = 12345;
+        reverseIterative(originalInt);
+
+        // reverse 12345 Recursively
+        int reverseRecursiveInt = 12345;
+        reverseRecursive(originalInt,reverseRecursiveInt);
+
+        System.out.println("------------------------------------------------------");
+        System.out.println("---------- Fibonacci, Factorial ----------------------");
+        System.out.println("------------------------------------------------------\n");
 
         // Fibonacci  0,1,1,2,3,5,8... -- PUB -- fib(0) = 0, fib(1) = 1, fib(2) = 1
         int result = fibRecursive(10);
@@ -51,39 +87,19 @@ public class WarmUp {
         result = fibIterative(10);
         System.out.println("fibInterative: " + result);
 
-        // factorial  5*4*3*2*1
+        // Factorial  Recursive 5*4*3*2*1
         int factorial = factorialRecursive(6);
         System.out.println("factorialRecursive:" + factorial);
+
+        // Factorial  Iterative
         factorial = factorialIterative(6);
         System.out.println("factorialIterative:" + factorial);
 
-        // reverse xyzu to uzyx with recursive method -- PUB
-        String test = "xyzu";
-        String teststr = reverseRecursively(test);
-        String reversed = test.chars()
-                .mapToObj(c -> (char)c)
-                .reduce("", (s,c) -> c+s, (s1,s2) -> s2+s1);
-        System.out.println("reverse:" + teststr);
-
-        // reverse int[] array
-        System.out.println("reverse an int Array");
-        int[] arr3 = new int[]{54, 432, 53, 21, 43, 12, 45, 11, 10, 9};
-        reverseIntArray(arr3);
-
-        // reverse Iterativaly
-        int originalInt = 1234;
-        int reverseIterativeNumber = reverseIterative(originalInt);
-        System.out.println("reverseIterativeNumber : " + reverseIterativeNumber);
-
-        // reverse Recursively
-        int reverseRecursiveInt = 12345;
-        reverseRecursiveInt =  reverseRecursive(originalInt,reverseRecursiveInt);
-        System.out.println("reverseRecursiveInt : " + reverseRecursiveInt);
-
     }
 
+
     private static void convertAnIntegerToAnArray(int i) {
-    System.out.println("convertAnIntegerToAnArray");
+        System.out.println("convertAnIntegerToAnArray");
         int [] arr = new int[String.valueOf(i).length()];
         String[] numStr = String.valueOf(i).split("");
         for ( int j = 0 ; j < numStr.length ; j++) {
@@ -172,11 +188,7 @@ public class WarmUp {
             set.add(c);
         isUnique = len == set.size() ? true : false;
 
-
-
-
-
-        // M3
+        // M2
         Map<Integer, Long> map = s.chars().boxed().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
         boolean notUnique = map.entrySet().stream().anyMatch(e -> e.getValue() > 1);
         System.out.println(s + " isAllUnique ? " + !notUnique);
@@ -252,25 +264,24 @@ public class WarmUp {
     }
 
     private static void reverseIntArray(int[] arr) {
-        System.out.println("------ reverse int [] ------- ");
-        // swap
+        System.out.println("------ reverse int [] 3 methods ------- ");
+        // m1: swap
         for ( int i=0 ; i< arr.length/2 ; i++){
             int t = arr[i];
             arr[i] = arr[arr.length-1-i];
             arr[arr.length-1-i] = t;
         }
 
-        // stream and locate from end to the beginning.
+        // m2: print end to the beginning.
         IntStream.range(0, arr.length)
-                .map( i -> arr[arr.length - i -1])
+                .map( i -> arr[arr.length - i - 1]) //   arr[arr.length - i -1] -> last to beginning
                 .forEachOrdered(System.out::println);
 
-        // only print
+        // m3: print backwards from the end
         int n = arr.length;
         while (n > 0) {
             System.out.print(arr[--n] + " ");
         }
-        System.out.println();
     }
 
 
@@ -326,8 +337,20 @@ public class WarmUp {
     }
 
 
+    /**
+     * take away: 3 steps
+     * 1st always define the exit condition,
+     * 2nd define the recursive call
+     * 3rd the input argument should be 'smaller' 'shorter' gradually/recursively until it can reach the exit condition
+     *
+     * tip for substring:
+     * if beginIndex is negative or larger than the length of this String object.
+     * so regularly you might think substring(1) will cause exception, but it's not, it will return empty string.
+     */
     public static String reverseRecursively(String s) {
-        if ( s.length() == 0) return "";
+        if (s != null && s.length() == 0) {
+            return "";
+        }
         return reverseRecursively(s.substring(1)) + s.charAt(0);
     }
 
